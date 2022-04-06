@@ -1,40 +1,44 @@
-import posts from "./tuits.js";
-import userController from "./user-controller.js";
+import tuitsDao from "../tuits-dao.js";
+//Remove all usage of the array from the tuits-controller
+// and instead import the tuits-dao which will provide
+// the functionality of interacting with the tuits collection.
 
-let tuits = posts;
-
-const createTuit = (req, res) => {
-    const newTuit = req.body;
-    newTuit._id = (new Date()).getTime() + '';
-    newTuit.avatar =  "/img/avatar/userav.jpeg";
-    newTuit.postedBy = "Felicia";
-    newTuit.handle = "feliciagtf"
-    newTuit.likes = 0;
-    newTuit.dislikes = 0;
-    tuits.push(newTuit);
-    res.json(newTuit);
+//Add async to all the functions in tuits-controller
+const findAllTuits = async (req, res) => {
+    //retrieve the tuits using the tuits-dao
+    const tuits = await tuitsDao.findAllTuits()
+    res.json(tuits);
 }
 
-const findAllTuits = (req, res) =>
-    res.json(tuits);
+const createTuit = async(req, res) => {
+    const newTuit = req.body;
+    const insertedTuit = await tuitsDao.createTuit(newTuit);
+    //more functions
+    // newTuit.avatar = "/img/avatar/userav.jpeg";
+    // newTuit.postedBy = "Felicia";
+    // newTuit.handle = "feliciagtf"
+    // newTuit.likes = 0;
+    // newTuit.dislikes = 0;
+    res.json(insertedTuit);
+}
 
-const updateTuit = (req, res) => {
+
+const updateTuit = async(req, res) => {
     const tuitdIdToUpdate = req.params.tid;
     const updatedTuit = req.body;
-    tuits = tuits.map(t => t._id === tuitdIdToUpdate ? updatedTuit : t);
-    res.sendStatus(200);
+    const status = await tuitsDao.updateTuit(tuitdIdToUpdate, updatedTuit);
+    res.send(status);
 }
 
 
-const deleteTuit = (req, res) => {
-    const tuitId = req.params["tid"]; // get tuit ID
-    const tuitIndex = tuits.findIndex((u) => u._id === tuitId); // find index of user 
-    tuits.splice(tuitIndex, 1); // delete user
-    res.sendStatus(200);
+const deleteTuit = async(req, res) => {
+    const tuitdIdToDelete = req.params.tid;
+    const status = await tuitsDao.deleteTuit(tuitdIdToDelete);
+    res.send(status);
 }
 
 
-const tuitController = (app) => {
+const tuitController = async(app) => {
     app.post('/api/tuits', createTuit);
     app.get('/api/tuits', findAllTuits);
     app.put('/api/tuits/:tid', updateTuit);
