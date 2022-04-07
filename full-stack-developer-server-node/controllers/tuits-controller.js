@@ -7,7 +7,7 @@ const createTuit = (req, res) => {
     const newTuit = req.body;
     newTuit._id = (new Date()).getTime() + '';
     newTuit.avatar =  "/img/avatar/userav.jpeg";
-    newTuit.postedBy = "Felicia";
+    newTuit.postedBy = {username: "Felicia"};
     newTuit.handle = "feliciagtf"
     newTuit.likes = 0;
     newTuit.dislikes = 0;
