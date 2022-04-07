@@ -12,13 +12,14 @@ const findAllTuits = async (req, res) => {
 
 const createTuit = async(req, res) => {
     const newTuit = req.body;
+    // newTuit.avatar = "/img/avatar/userav.jpeg";
+    newTuit.postedBy = "Felicia";
+    // newTuit.handle = "feliciagtf";
+    newTuit.likes = 0;
+    // newTuit.dislikes = 0;
     const insertedTuit = await tuitsDao.createTuit(newTuit);
     //more functions
-    // newTuit.avatar = "/img/avatar/userav.jpeg";
-    // newTuit.postedBy = "Felicia";
-    // newTuit.handle = "feliciagtf"
-    // newTuit.likes = 0;
-    // newTuit.dislikes = 0;
+
     res.json(insertedTuit);
 }
 

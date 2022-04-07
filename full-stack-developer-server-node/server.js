@@ -15,7 +15,7 @@ app.use(cors());
 // // helloController(app);
 // app.use(express.json());
 // // userController(app);
-// tuitController(app);
+tuitController(app);
 // //local
 // // app.listen(4000);
 //Heroku
