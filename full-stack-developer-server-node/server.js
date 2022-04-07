@@ -11,10 +11,8 @@ mongoose.connect(`mongodb+srv://feliciagtf:shotwell@cluster0.immtk.mongodb.net/m
 const app = express();
 app.use(cors());
 
-// app.get('/', (req, res) => {res.send('Welcome to Full Stack Development!')})
-// // helloController(app);
+app.get('/', (req, res) => {res.send('Welcome to Full Stack Development!')});
 app.use(express.json());
-// // userController(app);
 tuitController(app);
 // //local
 // // app.listen(4000);
