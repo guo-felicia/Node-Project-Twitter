@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 const schema = mongoose.Schema({
     tuit: String,
     likes: Number,
+    dislikes: Number,
+    avatar:String,
+    handle: String,
     postedBy: {
         username: String
     }

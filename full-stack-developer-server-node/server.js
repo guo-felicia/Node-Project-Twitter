@@ -13,7 +13,7 @@ app.use(cors());
 
 // app.get('/', (req, res) => {res.send('Welcome to Full Stack Development!')})
 // // helloController(app);
-// app.use(express.json());
+app.use(express.json());
 // // userController(app);
 tuitController(app);
 // //local
