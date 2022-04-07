@@ -18,5 +18,5 @@ app.use(cors());
 // tuitController(app);
 // //local
 // // app.listen(4000);
-// //Heroku
-// app.listen(process.env.PORT || 4000);
+//Heroku
+app.listen(process.env.PORT || 4000);
